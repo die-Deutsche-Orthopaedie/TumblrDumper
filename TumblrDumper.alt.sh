@@ -6,7 +6,7 @@ cd $blogname
 #for archive in $(curl "http://$blogname.tumblr.com/archive" | sed 's/<\/li>/\n/g ' | grep -Eo "archive/[0-9]{4}/[0-9]*" )
 time="6666666666"
 
-unitl [ -z $time ]
+until [ -z $time ]
 do
 	echo "in posts before $time: "
 	mkdir $time
