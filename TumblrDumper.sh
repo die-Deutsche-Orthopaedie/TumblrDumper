@@ -9,8 +9,8 @@ do
 	mkdir ${archive//\//.}
 	cd ${archive//\//.}
 	
-	for link in $(curl "http://$blogname.tumblr.com/$archive" | grep -Eo "http://$blogname.tumblr.com/post/[0-9]*/")
-	# some sites don't have a title, use ""http://$blogname.tumblr.com/post/[0-9]*" instead
+	for link in $(curl "http://$blogname.tumblr.com/$archive" | grep -Eo "http://$blogname.tumblr.com/post/[0-9]*")
+	# verified, no matter it set a title or not
 	do
 		echo $link
 		reallink=$(curl -Ls -o /dev/null -w %{url_effective} $link)
@@ -18,9 +18,14 @@ do
 		# reallink=$(curl -i $link | grep "Location")
 		# reallink=${reallink//Location:/}
 		reallink=${reallink//#_=_/}
-		mkdir ${reallink##*/}
-		cd ${reallink##*/}
-		
+		if [ -z "${reallink##*/}" ]
+		then
+			post=$reallink
+		else
+			post=${reallink##*/}
+		fi
+		mkdir $post
+		cd $post
 		# for image in $(curl $reallink | sed 's/\/>/\n/g ' | grep -Eo "<meta property=\"og:image\" content=\"http://[0-9].*tumblr.*_1280.jpg" | sed 's/<meta property="og:image" content="//g ')
 		for image in $(curl $reallink | sed 's/\/>/\n/g ' | grep -Eo "<meta property=\"og:image\" content=\".*.jpg" | sed 's/<meta property="og:image" content="//g ')
 		do
