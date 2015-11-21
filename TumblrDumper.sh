@@ -26,6 +26,7 @@ do
 		fi
 		mkdir $post
 		cd $post
+		
 		# for image in $(curl $reallink | sed 's/\/>/\n/g ' | grep -Eo "<meta property=\"og:image\" content=\"http://[0-9].*tumblr.*_1280.jpg" | sed 's/<meta property="og:image" content="//g ')
 		for image in $(curl $reallink | sed 's/\/>/\n/g ' | grep -Eo "<meta property=\"og:image\" content=\".*.jpg" | sed 's/<meta property="og:image" content="//g ')
 		do
