@@ -5,8 +5,7 @@ cd $blogname
 
 #for archive in $(curl "http://$blogname.tumblr.com/archive" | sed 's/<\/li>/\n/g ' | grep -Eo "archive/[0-9]{4}/[0-9]*" )
 time="6666666666"
-mkdir 0x6d1b
-cd 0x6d1b
+current_folder=$(pwd)
 
 until [ -z $time ]
 do
@@ -31,18 +30,14 @@ do
 			echo
 			cd ..
 		else
-			cd ..
 			folder=${link#<h2.class=\"date\">}
 			folder=${folder%<\/h2>}
 			echo "photos will be stored in: $folder"
-			mkdir $folder
-			cd $folder 
+			mkdir "$current_folder/$folder"
+			cd "$current_folder/$folder"
 		fi
 	done
 	
 	echo
 	time=$(curl "http://$blogname.tumblr.com/archive?before_time=$time" | grep -Eo "<a id=\"next_page_link\" href=\"\/archive\?before_time=[0-9]*\">" | grep -Eo "[0-9]*" )
 done 2> /dev/null
-
-cd ..
-rm -rf 0x6d1b
