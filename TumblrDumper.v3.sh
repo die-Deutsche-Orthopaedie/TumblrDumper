@@ -1,9 +1,11 @@
 blogname=$1
 
+op=$2
+
 mkdir $blogname
 cd $blogname
 
-time="6666666666"
+time="6666666666666666666666666666666666666666666666666666666666666666"
 current_folder=$(pwd)
 
 until [ -z $time ]
@@ -18,10 +20,13 @@ do
 			echo "    in $link: "
 			singlepost=${link#post\/}
 			singlepost=${singlepost//\//.}
-			if [ -d $singlepost ]
+			if [ "$op" == "-c" ]
 			then
-			  echo "It seemed to meet the already-downloaded files. the script will stop. "
-			  exit
+				if [ -d $singlepost ]
+				then
+					echo "It seemed to meet the already-downloaded files. the script will stop. "
+					exit
+				fi
 			fi
 			mkdir $singlepost
 			cd $singlepost
