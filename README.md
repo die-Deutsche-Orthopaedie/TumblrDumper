@@ -38,3 +38,10 @@ http://sexy-shorthair.tumblr.com/
 http://ero-cosplay.tumblr.com/
 
 http://erocosplaygirl.tumblr.com/
+
+http://npcpoketrainers.tumblr.com/
+
+
+UPDATE (16.07.28): only v3.1 can work right now. others will not find any post. 
+
+更新（16.07.28）：现在只有3.1版可以用，其他版本找不到任何帖子。
